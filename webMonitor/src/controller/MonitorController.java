@@ -1,7 +1,9 @@
 package controller;
 
-import model.*;
-import notification.Notification;
+import model.Subscription;
+import model.SubscriptionManager;
+import model.User;
+import model.WebsiteMonitor;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,6 @@ public class MonitorController {
     }
 
     public void checkAllSubscriptions() {
-
         long nowTime = System.currentTimeMillis() / 1000;
 
         for (Subscription s : subscriptionManager.getSubscriptions()) {
@@ -55,6 +56,7 @@ public class MonitorController {
                     s.updateLastContent(newContent);
                 }
 
+                // Gọi hàm thông báo của Observer Pattern
                 s.notifyObservers(changed);
 
             } catch (Exception e) {
