@@ -1,0 +1,79 @@
+Coding Conventions for the WebMonitor Software
+
+This file describes the Java coding standards and naming conventions applied to the website monitor software.
+
+1. Naming Conventions
+
+- Classes: Use singular nouns in CamelCase with an uppercase first letter.
+  Example recommended class names:
+    WebMonitor
+    HtmlComparisonStrategy
+    SizeComparisonStrategy
+    TextComparisonStrategy
+    MonitorController
+    SubscriptionManager
+    UserNotificationObserver
+
+- Variables: Use camelCase with a lowercase first letter.
+  Example variable names:
+    currentUrl
+    oldContent
+    lastCheckedTime
+    selectedStrategy
+
+- Methods: Use verb phrases in camelCase.
+  Example method names:
+    checkForChanges()
+    notifyObservers()
+    getContent()
+    setStrategy()
+    hasChanged()
+
+- Getters and setters: Follow the standard Java bean pattern.
+  getXxx(), setXxx(), isXxx() where appropriate.
+
+- Constants: Use ALL_UPPERCASE with underscores.
+  Example constant names:
+    MAX_RETRY_ATTEMPTS
+    DEFAULT_POLL_INTERVAL
+
+2. Code Formatting and Style
+
+- Indentation: Use consistent indentation, typically 4 spaces per block level.
+- Line length: Keep lines within 80 to 120 characters when possible.
+- Nesting: Avoid excessive nesting, limiting loops and conditional depth to preserve readability.
+- Imports: Group imports logically and avoid wildcard imports such as import java.util.*.
+
+3. Organization of Code
+
+- Packages: Group classes by responsibility, ideally using reverse-domain style package names.
+  Example package structure:
+    com.monitor.controller
+    com.monitor.model
+    com.monitor.notification
+    com.monitor.observer
+    com.monitor.strategy
+
+- Class member order: Place constants first, then static fields, instance fields, constructors, and methods.
+
+4. Documentation and Principles
+
+- Use Javadoc comments for classes and public methods, including tags like @author, @param, and @return.
+- Apply DRY (Don't Repeat Yourself) to avoid duplicate logic and make the code easier to maintain.
+- Write self-descriptive code so the logic is readable and looks intentional.
+
+5. Recommended Renames to Match Conventions
+
+The repository contains several files and classes where the naming can be improved to match Java conventions:
+
+- webMonitor.java -> WebMonitor.java
+- subcriptionManager.java -> SubscriptionManager.java
+- webComparision.java -> WebComparison.java
+- htmlComparision.java -> HtmlComparison.java
+- textComparision.java -> TextComparison.java
+- monitorController.java -> MonitorController.java
+- userNotificationObserver.java -> UserNotificationObserver.java
+
+These changes would make file names and class names consistent with standard Java style.
+
+By following these conventions, the Exercise 6 code becomes easier to read, maintain, and extend for other developers.

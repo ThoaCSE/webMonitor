@@ -1,6 +1,6 @@
 package strategy;
 
-public class htmlComparision implements webComparision {
+public class HtmlComparison implements WebComparison {
     @Override
     public boolean hasChanged(String oldContent, String newContent) {
         if (oldContent == null || newContent == null) {

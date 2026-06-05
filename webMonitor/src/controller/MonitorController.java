@@ -1,19 +1,19 @@
 package controller;
 
 import model.Subscription;
-import model.subcriptionManager;
+import model.SubscriptionManager;
 import model.User;
-import model.webMonitor;
-import strategy.webComparision;
+import model.WebMonitor;
+import strategy.WebComparison;
 import java.util.ArrayList;
 
-public class monitorController {
-    private subcriptionManager subscriptionManager;
-    private webMonitor websiteMonitor;
+public class MonitorController {
+    private SubscriptionManager subscriptionManager;
+    private WebMonitor websiteMonitor;
 
-    public monitorController() {
-        this.subscriptionManager = new subcriptionManager();
-        this.websiteMonitor = new webMonitor();
+    public MonitorController() {
+        this.subscriptionManager = new SubscriptionManager();
+        this.websiteMonitor = new WebMonitor();
     }
 
     public void registerUser(User user) {
@@ -28,11 +28,11 @@ public class monitorController {
         subscriptionManager.removeSubscriptionForUser(userId, url);
     }
 
-    public subcriptionManager getSubscriptionManager() {
+    public SubscriptionManager getSubscriptionManager() {
         return subscriptionManager;
     }
 
-    public void setComparisonStrategy(webComparision strategy) {
+    public void setComparisonStrategy(WebComparison strategy) {
         this.websiteMonitor.setComparisonStrategy(strategy);
     }
 

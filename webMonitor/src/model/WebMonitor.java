@@ -1,7 +1,7 @@
 package model;
 
-import strategy.webComparision;
-import strategy.htmlComparision;
+import strategy.WebComparison;
+import strategy.HtmlComparison;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -9,15 +9,15 @@ import java.util.Scanner;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
 
-public class webMonitor {
+public class WebMonitor {
     // Luôn giữ tham chiếu lỏng qua Interface thay vì lớp cụ thể
-    private webComparision comparisonStrategy;
+    private WebComparison comparisonStrategy;
 
-    public webMonitor() {
-        this.comparisonStrategy = new htmlComparision();
+    public WebMonitor() {
+        this.comparisonStrategy = new HtmlComparison();
     }
 
-    public void setComparisonStrategy(webComparision comparisonStrategy) {
+    public void setComparisonStrategy(WebComparison comparisonStrategy) {
         this.comparisonStrategy = comparisonStrategy;
     }
 

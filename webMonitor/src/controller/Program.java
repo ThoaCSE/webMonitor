@@ -2,13 +2,13 @@ package controller;
 
 import model.Subscription;
 import model.User;
-import model.subcriptionManager;
+import model.SubscriptionManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        monitorController controller = new monitorController();
+        MonitorController controller = new MonitorController();
         try (Scanner scanner = new Scanner(System.in)) {
             boolean running = true;
 
@@ -49,7 +49,7 @@ public class Program {
         }
     }
 
-    private static void addUserUI(monitorController controller, Scanner scanner) {
+    private static void addUserUI(MonitorController controller, Scanner scanner) {
         System.out.print("Enter your user ID: ");
         String userId = scanner.nextLine().trim();
 
@@ -65,7 +65,7 @@ public class Program {
         System.out.println("User added.");
     }
 
-    private static void addSubscriptionUI(monitorController controller, Scanner scanner) {
+    private static void addSubscriptionUI(MonitorController controller, Scanner scanner) {
         System.out.print("Enter your user ID: ");
         String userId = scanner.nextLine().trim();
 
@@ -82,8 +82,8 @@ public class Program {
         System.out.println("Subscription added for user " + userId + ".");
     }
 
-    private static void showUsersAndSubscriptionsUI(monitorController controller) {
-        subcriptionManager manager = controller.getSubscriptionManager();
+    private static void showUsersAndSubscriptionsUI(MonitorController controller) {
+        SubscriptionManager manager = controller.getSubscriptionManager();
         ArrayList<User> users = manager.getUsers();
         ArrayList<Subscription> subs = manager.getSubscriptions();
 
@@ -118,7 +118,7 @@ public class Program {
         }
     }
 
-    private static void watchChangesUI(monitorController controller, Scanner scanner) {
+    private static void watchChangesUI(MonitorController controller, Scanner scanner) {
         if (controller.getSubscriptionManager().getSubscriptions().isEmpty()) {
             System.out.println("No subscriptions available to watch.");
             return;
@@ -133,15 +133,15 @@ public class Program {
         String strategyChoice = scanner.nextLine().trim();
         switch (strategyChoice) {
             case "1":
-                controller.setComparisonStrategy(new strategy.sizeComparison());
+                controller.setComparisonStrategy(new strategy.SizeComparison());
                 System.out.println("Using size comparison.");
                 break;
             case "3":
-                controller.setComparisonStrategy(new strategy.textComparision());
+                controller.setComparisonStrategy(new strategy.TextComparison());
                 System.out.println("Using text comparison.");
                 break;
             default:
-                controller.setComparisonStrategy(new strategy.htmlComparision());
+                controller.setComparisonStrategy(new strategy.HtmlComparison());
                 System.out.println("Using HTML comparison.");
                 break;
         }
@@ -174,8 +174,8 @@ public class Program {
         System.out.println("Watch mode stopped.");
     }
 
-    private static Subscription selectWatchTarget(monitorController controller, Scanner scanner) {
-        subcriptionManager manager = controller.getSubscriptionManager();
+    private static Subscription selectWatchTarget(MonitorController controller, Scanner scanner) {
+        SubscriptionManager manager = controller.getSubscriptionManager();
         ArrayList<Subscription> subs = manager.getSubscriptions();
 
         System.out.println("--- Select subscription to watch ---");
