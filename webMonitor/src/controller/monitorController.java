@@ -1,19 +1,19 @@
 package controller;
 
 import model.Subscription;
-import model.SubscriptionManager;
+import model.subcriptionManager;
 import model.User;
-import model.WebsiteMonitor;
-
+import model.webMonitor;
+import strategy.webComparision;
 import java.util.ArrayList;
 
-public class MonitorController {
-    private SubscriptionManager subscriptionManager;
-    private WebsiteMonitor websiteMonitor;
+public class monitorController {
+    private subcriptionManager subscriptionManager;
+    private webMonitor websiteMonitor;
 
-    public MonitorController() {
-        subscriptionManager = new SubscriptionManager();
-        websiteMonitor = new WebsiteMonitor();
+    public monitorController() {
+        this.subscriptionManager = new subcriptionManager();
+        this.websiteMonitor = new webMonitor();
     }
 
     public void registerUser(User user) {
@@ -28,14 +28,28 @@ public class MonitorController {
         subscriptionManager.removeSubscriptionForUser(userId, url);
     }
 
-    public SubscriptionManager getSubscriptionManager() {
+    public subcriptionManager getSubscriptionManager() {
         return subscriptionManager;
     }
 
-    public void checkAllSubscriptions() {
+    public void setComparisonStrategy(webComparision strategy) {
+        this.websiteMonitor.setComparisonStrategy(strategy);
+    }
+
+    public void checkAllSubscriptions(boolean suppressNoChange) {
+        checkSubscriptions(subscriptionManager.getSubscriptions(), suppressNoChange);
+    }
+
+    public void checkSubscription(Subscription subscription, boolean suppressNoChange) {
+        ArrayList<Subscription> targets = new ArrayList<>();
+        targets.add(subscription);
+        checkSubscriptions(targets, suppressNoChange);
+    }
+
+    private void checkSubscriptions(ArrayList<Subscription> subscriptions, boolean suppressNoChange) {
         long nowTime = System.currentTimeMillis() / 1000;
 
-        for (Subscription s : subscriptionManager.getSubscriptions()) {
+        for (Subscription s : subscriptions) {
             long lastTime = s.getLastCheckTimeSeconds();
             int frequency = s.getFrequency();
 
@@ -56,17 +70,14 @@ public class MonitorController {
                     s.updateLastContent(newContent);
                 }
 
-                // Gọi hàm thông báo của Observer Pattern
-                s.notifyObservers(changed);
+                if (changed || !suppressNoChange) {
+                    s.notifyObservers(changed);
+                }
 
             } catch (Exception e) {
                 System.out.println("Error checking " + s.getUrl() + ": " + e.getMessage());
                 System.out.println("----------------------------------------------------");
             }
         }
-    }
-
-    private ArrayList<User> getUsers() {
-        return subscriptionManager.getUsers();
     }
 }

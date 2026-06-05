@@ -5,11 +5,11 @@ import model.User;
 import observer.Observer;
 import java.util.Objects;
 
-public class UserNotificationObserver implements Observer {
+public class userNotificationObserver implements Observer {
     private User user;
     private Notification notification;
 
-    public UserNotificationObserver(User user) {
+    public userNotificationObserver(User user) {
         this.user = user;
         this.notification = new Notification();
     }
@@ -27,7 +27,7 @@ public class UserNotificationObserver implements Observer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserNotificationObserver that = (UserNotificationObserver) o;
+        userNotificationObserver that = (userNotificationObserver) o;
         return Objects.equals(user.getUserId(), that.user.getUserId());
     }
 

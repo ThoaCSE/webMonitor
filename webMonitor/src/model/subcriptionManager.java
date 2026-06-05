@@ -1,13 +1,13 @@
 package model;
 
-import notification.UserNotificationObserver;
+import notification.userNotificationObserver;
 import java.util.ArrayList;
 
-public class SubscriptionManager {
+public class subcriptionManager {
     private ArrayList<User> users;
     private ArrayList<Subscription> subscriptions;
 
-    public SubscriptionManager() {
+    public subcriptionManager() {
         users = new ArrayList<>();
         subscriptions = new ArrayList<>();
     }
@@ -45,7 +45,7 @@ public class SubscriptionManager {
         }
 
         sub.addSubscriber(user);
-        sub.attach(new UserNotificationObserver(user));
+        sub.attach(new userNotificationObserver(user));
     }
 
     public void removeSubscriptionForUser(String userId, String url) {
@@ -56,7 +56,7 @@ public class SubscriptionManager {
         if (sub != null) {
             sub.removeSubscriber(user);
 
-            UserNotificationObserver observerToRemove = new UserNotificationObserver(user);
+            userNotificationObserver observerToRemove = new userNotificationObserver(user);
             sub.detach(observerToRemove);
 
             if (sub.getUsers().isEmpty()) {

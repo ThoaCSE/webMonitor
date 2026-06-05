@@ -1,11 +1,9 @@
 package model;
 
-import notification.UserNotificationObserver;
 import observer.Observer;
 import observer.Subject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Subscription implements Subject {
     private String url;
