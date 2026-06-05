@@ -125,9 +125,9 @@ public class Program {
         }
 
         System.out.println("--- Choose Website Comparison Strategy ---");
-        System.out.println("1. Identical content size");
-        System.out.println("2. Identical HTML content");
-        System.out.println("3. Identical text content");
+        System.out.println("1. Compare content size");
+        System.out.println("2. Compare HTML content");
+        System.out.println("3. Compare text content");
         System.out.print("Select strategy: ");
 
         String strategyChoice = scanner.nextLine().trim();
