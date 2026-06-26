@@ -1,14 +1,38 @@
 package controller;
 
 import model.Subscription;
-import model.User;
 import model.SubscriptionManager;
+import model.User;
+import model.WebMonitor;
+import strategy.HtmlComparison;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
         MonitorController controller = new MonitorController();
+
+        if (args.length > 0) {
+            boolean showContent = false;
+            String url = null;
+
+            for (String arg : args) {
+                if ("--show".equalsIgnoreCase(arg) || "--show-content".equalsIgnoreCase(arg)) {
+                    showContent = true;
+                } else if (url == null) {
+                    url = arg;
+                }
+            }
+
+            if (url != null) {
+                runCliMode(url, showContent);
+                return;
+            }
+
+            System.out.println("Usage: java -cp out controller.Program [--show] <url>");
+            return;
+        }
+
         try (Scanner scanner = new Scanner(System.in)) {
             boolean running = true;
 
@@ -46,6 +70,26 @@ public class Program {
                         System.out.println("Invalid choice. Please choose 1-5.");
                 }
             }
+        }
+    }
+
+    private static void runCliMode(String url, boolean showContent) {
+        WebMonitor monitor = new WebMonitor();
+        monitor.setComparisonStrategy(new HtmlComparison());
+
+        System.out.println("Website Monitor CLI");
+        System.out.println("Target URL: " + url);
+
+        try {
+            String content = monitor.downloadContent(url);
+            System.out.println("Fetched " + content.length() + " characters from " + url);
+            if (showContent) {
+                System.out.println("Fetched content:");
+                System.out.println(content);
+            }
+            System.out.println("Initial content received successfully.");
+        } catch (Exception e) {
+            System.out.println("Error fetching " + url + ": " + e.getMessage());
         }
     }
 
